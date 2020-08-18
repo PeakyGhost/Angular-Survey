@@ -1,0 +1,29 @@
+
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label formArrayName="orders" *ngFor="let order of ordersFormArray.controls; let i = index">
+    
+    <!-- <input type="checkbox" [formControlName]="i"> -->
+    {{ordersData[i].topicName}}
+    <br><br>
+    <label *ngFor="let que of ordersData[i].data" >
+      {{que.desc}}
+      <br><br>
+      <label *ngFor="let sub of que.questions">
+        {{sub.question}}
+        <br><br>
+        <label *ngFor="let option of sub.options">
+          <input type="checkbox" [formControlName]="i">
+          {{option.name}}
+        </label>
+
+      </label>
+    </label>
+
+  </label>
+
+
+  <div *ngIf="!form.valid">At least one order must be selected</div>
+  <br>
+  <button [disabled]="!form.valid">submit</button>
+</form>
